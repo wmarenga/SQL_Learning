@@ -1,0 +1,25 @@
+-- Quantos produtos vendemos na empresa?
+
+select count(*) from DimProduct
+
+
+
+-- Qual o valor do produto mais caro?
+
+select max(UnitPrice) from DimProduct
+
+
+
+-- Qual a média dos preços dos produtos?
+
+select
+round(AVG(unitprice),2)
+from DimProduct
+
+
+
+-- Quantas marcas temos na empresa?
+
+select
+count(distinct(BrandName))
+from DimProduct

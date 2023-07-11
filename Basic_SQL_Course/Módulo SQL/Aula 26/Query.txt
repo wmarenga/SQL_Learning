@@ -1,0 +1,25 @@
+-- Order By e Top
+
+-- Exiba a tabela de produtos
+-- (Nome Produto, Marca, Preço)
+-- Ordene do mais caro para o mais barato
+
+select
+ProductName,
+BrandName,
+UnitPrice
+from DimProduct
+order by UnitPrice desc
+
+
+
+
+
+-- Exiba apenas os 10 produtos mais baratos
+
+select top 10
+ProductName,
+BrandName,
+UnitPrice
+from DimProduct
+order by UnitPrice asc

@@ -1,0 +1,43 @@
+-- Exiba o preço mais caro de cada marca
+
+
+select * from DimProduct
+
+select
+brandname,
+max(unitprice) as 'PrecoMaximo'
+from DimProduct
+group by BrandName
+
+
+
+-- Exiba todas as marcas e todas as classes
+
+select 
+brandname,
+classname
+from DimProduct
+group by BrandName, ClassName
+
+
+
+-- Calcule quantos produtos tem em cada marca
+-- E em cada classe
+
+select 
+brandname,
+classname,
+COUNT(ProductKey) as 'QtdProdutos'
+from DimProduct
+group by BrandName, ClassName
+
+
+
+-- Calcule a média de preços de cada marca de cada classe
+
+select 
+brandname,
+classname,
+round(AVG(unitprice),2) as 'PrecoMedio'
+from DimProduct
+group by BrandName, ClassName

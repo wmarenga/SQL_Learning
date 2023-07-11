@@ -1,0 +1,19 @@
+-- Junte as tabelas FactExchangeRate e DimCurrency
+-- Mantenha apenas as colunas:
+-- ExchangeRateKey, CurrencyKey, DateKey
+-- AverageRate, CurrencyName
+
+
+
+
+-- Gabarito:
+
+select
+cotacoes.ExchangeRateKey,
+cotacoes.CurrencyKey,
+cotacoes.DateKey,
+cotacoes.AverageRate,
+moedas.CurrencyName
+from FactExchangeRate cotacoes
+left join DimCurrency moedas on cotacoes.CurrencyKey=moedas.CurrencyKey
+

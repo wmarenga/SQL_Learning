@@ -1,0 +1,119 @@
+/* 
+O cliente não quer nenhuma informação relativa á vendas ou estoque,
+desejando somente as informações primárias de clientes.
+
+O nosso cliente solicitou uma tabela para armazenar os livros que são
+comercializados pela empresa. A solicitação é somente para livros e não
+há a necessidade de realizar busca em outras tabelas. Hoje há um funcionário
+de vendas que tem uma tabela do Excel para guardar esses registros, mas as 
+buscas estão ficando complexas. Decidiu-se então criar um banco de dados
+separado para esse funcionário.
+
+Após a criação da tabela, devemos entregar algumas queries prontas para que 
+sejam enviadas para o programador. As queries são as seguintes:
+
+1) Trazer todos os dados;
+2) Trazer o nome do livro e o nome da editora;
+3) Trazer o nome do livro e a UF dos livros publicados por autores do sexo masculino;
+4) Trazer o nome do livro e o número de páginas dos livros publicados por autores 
+do sexo feminino;
+5) Trazer os valores dos livros das editoras de São Paulo;
+6) Trazer os dados dos autores do sexo masculino que tiveram livros publicados 
+por São Paulo ou Rio de Janeiro (Questão Desafio).
+*/
+
+CREATE DATABASE LIVRARIA;
+
+USE LIVRARIA;
+
+CREATE TABLE LIVROS(
+	NOME_DO_LIVRO VARCHAR(100),
+	NOME_DO_AUTOR VARCHAR(40),
+	SEXO_DO_AUTOR VARCHAR(9),
+	NUMERO_DE_PAGINAS INT(5),
+	NOME_DA_EDITORA VARCHAR(40),
+	VALOR_LIVRO INT(10),
+	ESTADO_DA_EDITORA CHAR(2),
+	ANO_PUPLICACAO CHAR(4)
+);
+
+/* ALTERANDO COLUNAS */
+
+ALTER TABLE LIVROS CHANGE NOME_DO_LIVRO LIVRO VARCHAR(100) NULL;
+ALTER TABLE LIVROS CHANGE NOME_DO_AUTOR AUTOR VARCHAR(100) NULL;
+ALTER TABLE LIVROS CHANGE SEXO_DO_AUTOR SEXO CHAR(9) NULL;
+ALTER TABLE LIVROS CHANGE NUMERO_DE_PAGINAS PAGINAS INT(5) NULL;
+ALTER TABLE LIVROS CHANGE NOME_DA_EDITORA EDITORA VARCHAR(30) NULL;
+ALTER TABLE LIVROS CHANGE VALOR_LIVRO VALOR FLOAT(10,2) NULL;
+ALTER TABLE LIVROS MODIFY COLUMN VALOR FLOAT(10,2);
+ALTER TABLE LIVROS CHANGE ESTADO_DA_EDITORA UF CHAR(2) NULL;
+ALTER TABLE LIVROS CHANGE ANO_PUPLICACAO ANO INT(4) NULL;
+
+/* ADICIONANDO TUPLAS (REGISTROS)*/
+
+INSERT INTO LIVROS VALUES ('Cavaleiro Real', 'Ana Claudia', 'Feminino', 465, 'Atlas', 49.9, 'RJ', '2009');
+INSERT INTO LIVROS VALUES ('SQL para leigos', 'João Nunes', 'Masculino', 450, 'Addison', 98, 'SP', '2018');
+INSERT INTO LIVROS VALUES ('Receitas Caseiras', 'Celia Tavares', 'Feminino', 210, 'Atlas', 45, 'RJ', '2008');
+INSERT INTO LIVROS VALUES ('Pessoas Efetivas', 'Eduardo Santos', 'Masculino', 390, 'Beta', 78.99, 'RJ', '2018');
+INSERT INTO LIVROS VALUES ('Habitos Saudáveis', 'Eduardo Santos', 'Masculino', 630, 'Beta', 150.98, 'RJ', '2019');
+INSERT INTO LIVROS VALUES ('A Casa Marrom', 'Hermes Macedo', 'Masculino', 250, 'Bubba', 60, 'MG', '2016');
+INSERT INTO LIVROS VALUES ('Estacio Querido', 'Geraldo Francisco', 'Masculino', 310, 'Insignia', 100, 'ES', '2015');
+INSERT INTO LIVROS VALUES ('Pra sempre amigas', 'Leda Silva', 'Feminino', 510, 'Insignia', 78.98, 'ES', '2011');
+INSERT INTO LIVROS VALUES ('Copas Inesqueciveis', 'Marco Alcantara', 'Masculino', 200, 'Larson', 130.98, 'RS', '2018');
+INSERT INTO LIVROS VALUES ('O poder da mente', 'Clara Mafra', 'Feminino', 120, 'Continental', 56.58, 'SP', '2017');
+
+/* 1) Trazer todos os dados; */
+
+SELECT * FROM LIVROS;
+
+/* VER TODAS AS DATABASES CRIADAS */
+
+SHOW DATABASES;
+
+/* CONECTANDO A BASE DE DADOS */
+
+USE DATABASE_NAME;
+
+/* SABER QUAL BASE ESTÁ CONECTADO */
+
+STATUS
+
+/* 2) Trazer o nome do livro e o nome da editora; */
+
+SELECT LIVRO, EDITORA
+FROM LIVROS;
+
+/* 3) Trazer o nome do livro e a UF dos livros publicados por autores do sexo masculino; */
+
+SELECT LIVRO, UF FROM LIVROS
+WHERE SEXO LIKE 'MASCULINO';
+/* OU */
+WHERE SEXO = 'MASCULINO';
+
+/* 4) Trazer o nome do livro e o número de páginas dos livros publicados por autores do sexo feminino;*/
+
+SELECT LIVRO, PAGINAS FROM LIVROS
+WHERE SEXO LIKE 'FEMININO';
+
+/* 5) Trazer os valores dos livros das editoras de São Paulo; */
+
+SELECT LIVRO, VALOR FROM LIVROS
+WHERE UF LIKE "SP";
+
+/* 6) Trazer os dados dos autores do sexo masculino que tiveram livros publicados 
+por São Paulo ou Rio de Janeiro (Questão Desafio).*/
+
+/* 1 FORMA */
+
+SELECT AUTOR, SEXO FROM LIVROS
+WHERE UF REGEXP ('RJ|SP');
+
+/* 2 FORMA */
+
+SELECT AUTOR FROM LIVROS
+WHERE UF LIKE 'RJ' OR UF LIKE 'SP';
+
+/* FILTRO COM CRITERIOS EM COLUNAS DIFERENTES */
+
+SELECT AUTOR, SEXO FROM LIVROS
+WHERE UF = 'RJ' AND AUTOR LIKE 'ANA%';

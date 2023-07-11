@@ -1,0 +1,12 @@
+-- Exiba as marcas da empresa usando 
+-- a função 'Group By'
+-- Calcule quantos produtos temos por marca
+
+select
+brandname,
+count(ProductKey) as 'QtdProdutos'
+from DimProduct
+group by BrandName
+
+
+

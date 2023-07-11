@@ -1,0 +1,34 @@
+--Filtre apenas a Classe Econômica
+
+select 
+brandname,
+classname,
+round(AVG(unitprice),2) as 'PrecoMedio'
+from DimProduct
+where ClassName='Economy'
+group by BrandName, ClassName
+
+
+
+
+-- Qual a média de preços da classe economica
+
+select
+classname,
+round(avg(unitprice),2) as 'PrecoMedio'
+from DimProduct
+where ClassName='Economy'
+group by ClassName
+
+
+
+-- Qual a média de preços da Contoso
+-- da classe economica
+
+select 
+brandname,
+classname,
+round(AVG(unitprice),2) as 'PrecoMedio'
+from DimProduct
+where ClassName='Economy'
+group by BrandName, ClassName

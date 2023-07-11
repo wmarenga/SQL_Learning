@@ -1,0 +1,16 @@
+Query 1
+
+select * from DimStore
+--essa linha seleciona a tabela de Lojas
+select StoreName as 'NomeLoja', StoreDescription as 'DescricaoLoja', Status, AddressLine1 as 'Endereco' from DimStore
+
+
+Query 2
+
+select
+ProductKey,
+ProductName,
+BrandName,
+ClassName
+from DimProduct
+where (ClassName='Regular' or ClassName='Deluxe') and BrandName='Contoso'

@@ -1,0 +1,25 @@
+select
+cotacoes.ExchangeRateKey,
+Cotacoes.CurrencyKey,
+cotacoes.DateKey,
+Cotacoes.AverageRate,
+Moedas.CurrencyName,
+from factexchangerate Cotacoes
+left join DimCurrency Moedas on Cotacoes.CurrencyKey=Moedas.CurrencyKey
+
+
+Site com os códigos para conversão no SQL: 
+https://docs.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15
+
+
+Resultado Final da Aula:
+
+select
+cotacoes.ExchangeRateKey,
+Cotacoes.CurrencyKey,
+convert(varchar(10),cotacoes.DateKey, 103) as 'DateKey',
+Cotacoes.AverageRate,
+Moedas.CurrencyName,
+CONCAT(cotacoes.datekey,cotacoes.CurrencyKey)
+from factexchangerate Cotacoes
+left join DimCurrency Moedas on Cotacoes.CurrencyKey=Moedas.CurrencyKey

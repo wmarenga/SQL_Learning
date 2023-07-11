@@ -1,0 +1,28 @@
+Tabela de Cotações:
+
+select
+cotacoes.ExchangeRateKey,
+Cotacoes.CurrencyKey,
+convert(varchar(10),cotacoes.DateKey, 103) as 'DateKey',
+Cotacoes.AverageRate,
+Moedas.CurrencyName,
+CONCAT(convert(varchar(10), cotacoes.datekey, 103),cotacoes.CurrencyKey) as 'DateCurrencyKey'
+from factexchangerate Cotacoes
+left join DimCurrency Moedas on Cotacoes.CurrencyKey=Moedas.CurrencyKey
+
+
+
+Tabela de Vendas:
+
+select
+SalesKey,
+convert(varchar(10), DateKey, 103) as 'DateKey',
+StoreKey,
+ProductKey,
+CurrencyKey,
+SalesQuantity,
+ReturnQuantity,
+ReturnAmount,
+DiscountAmount,
+concat(convert(varchar(10), DateKey, 103),CurrencyKey) as 'DateCurrencyKey'
+from FactSales

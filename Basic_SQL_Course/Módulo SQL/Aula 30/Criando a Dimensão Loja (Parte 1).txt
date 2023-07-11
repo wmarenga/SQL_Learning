@@ -1,0 +1,18 @@
+select
+dimstore.StoreKey,
+DimStore.StoreName,
+DimGeography.RegionCountryName
+from DimStore
+left join DimGeography on DimStore.GeographyKey=DimGeography.GeographyKey
+
+
+
+
+
+
+
+
+
+-- SELECT *
+-- FROM tabela_esquerda
+-- LEFT JOIN tabela_direita ON tabela_esquerda.coluna = tabela_direita.coluna

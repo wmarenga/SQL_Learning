@@ -1,0 +1,16 @@
+-- Criar Tabela Dimensão Produto
+-- Manter ProductKey, ProductName,
+-- BrandName, UnitCost, UnitPrice, 
+-- ProductSubcategoryName, ProductCategoryName
+
+select
+produto.ProductKey,
+produto.ProductName,
+produto.BrandName,
+produto.UnitCost,
+produto.UnitPrice,
+subcategoria.ProductSubcategoryName,
+categoria.ProductCategoryName
+from DimProduct produto
+left join DimProductSubcategory subcategoria on produto.ProductSubcategoryKey = subcategoria.ProductSubcategoryKey
+left join DimProductCategory categoria on subcategoria.ProductCategoryKey=categoria.ProductCategoryKey

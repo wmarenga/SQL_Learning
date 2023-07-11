@@ -1,0 +1,7 @@
+select 
+EmployeeKey,
+CONCAT(firstname, ' ', lastname) as 'FullName',
+Title,
+replace(REPLACE(Gender, 'M', 'Masculino'),'F', 'Feminino') as 'Genero',
+DepartmentName
+from DimEmployee

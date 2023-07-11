@@ -1,0 +1,8 @@
+select 
+EmployeeKey,
+CONCAT(firstname, ' ', lastname) as 'FullName',
+Title,
+replace(REPLACE(Gender, 'M', 'Masculino'),'F', 'Feminino') as 'Genero',
+DepartmentName
+from DimEmployee funcionarios
+where Gender='M' and (Title='Sales Region Manager' or Title='Sales State Manager')
